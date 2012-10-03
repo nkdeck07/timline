@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<title>CIGNA Timeline</title>
+<meta name="Author" content="Cantina Consulting">
+
+<link rel="stylesheet" href="css/styles.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+	<div id="content">
+		<div id="timer">
+			<span id="counter">0</span>&nbsp;<span id="unit">Hours</span>
+		</div>
+		<div id="timeline">
+			<div class="tl-container">
+				<div id="tl-indicator" class="tl-container">
+					<img src="images/indicator.png" alt="Indicator" />
+				</div>
+			</div>
+			<div class="tl-container">
+				<div id="tl-back"></div>
+			</div>
+		</div>
+		<header>
+			<div class="container">
+				<h1>Day in the Life of Asset Management Sales</h1>
+			</div>
+		</header>
+
+		<div title="0 hours" class="section">
+			<div class="container">
+				<div class="storybox">
+					<img src="images/boxtop.png" alt="info" width="25"
+						height="25">
+					<h4> Relationship Manager (RM) receives alert on his iPhone following a newsfeed off a keyword interest (defined contribution)
+</h4>
+				</div>
+			</div>
+		</div>
+		
+		<div title="1 hours" class="section">
+			<div class="container">
+				<div class="storybox">
+					<img src="images/boxtop.png" alt="info" width="25"
+						height="25">
+					<h4>RM shares article with Community and hashtags with #[Defined Contribution]</h4>
+				</div>
+			</div>
+		</div>
+
+		<div title="4 hours" class="section">
+			<div class="container">
+				<div class="storybox">
+					<img src="images/boxtop.png" alt="info" width="25"
+						height="25">
+					<h4>Sales Team Coordinator receives email notification and begins further dialog in Community page
+</h4>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div title="6 hours" class="section">
+			<div class="container">
+				<div class="storybox">
+					<img src="images/boxtop.png" alt="info" width="25"
+						height="25">
+					<h4>Sales Team Coordinator comments and assigns tasks via a collaboration platform list to the appropriate team
+</h4>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div title="2 days" class="section">
+			<div class="container">
+				<div class="storybox">
+					<img src="images/boxtop.png" alt="info" width="25"
+						height="25">
+					<h4> Marketing Support Liaison completes analysis and works with Marketing team to assemble collateral package for Salesperson
+</h4>
+					
+				</div>
+			</div>
+		</div>
+
+		<div title="3 days" class="section">
+			<div class="container">
+				<div class="storybox">
+					<img src="images/boxtop.png" alt="info" width="25"
+						height="25">
+					<h4>Salesperson makes sales call to key prospective accounts in territory using the assembled and relevant marketing materials </h4>
+					
+			</div>
+		</div>
+	</div>
+
+		<div title="4 days" class="section">
+			<div class="container">
+				<div class="storybox">
+					<img src="images/boxtop.png" alt="info" width="25"
+						height="25">
+					<h4>Salesperson provides feedback into the Community about the sales strategy, materials used, and tactics that worked well</h4>
+					
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	
+		// Setup the time indicator and bottom padding
+		function init() {
+			var y = $('.storybox:first').offset().top;
+			$('#tl-indicator').css('top', y);
+			$('#timer').css('top', y);
+			
+			$('#tl-back').css('height', 0);
+			
+			$('#content').css('paddingBottom', 0);
+			var p = $(window).height() - y - $('.storybox:last').height();          
+			$('#content').css('paddingBottom', p);
+			
+			$('#tl-back').css('height', $(document).height());
+		}
+		
+		// Setup the ready handler
+		$(document).ready(init);
+		
+		// Setup the resize handler
+		$(window).resize(init);
+		
+		// Resolve page elements for scroll events
+		var timer = $('#timer');
+		var counter = $('#counter');
+		var unit = $('#unit');
+		var stories = $('.storybox');
+		
+		// Setup the scroll handler
+		$(window).scroll(function() {
+			var threshold = timer.offset().top + 20;
+			var lastStory = null;
+			
+			// find the last story above the indicator
+			stories.each(function() {				
+				if ($(this).offset().top <= threshold) {
+					lastStory = this;
+				}
+			});
+			
+			// and set the time indicator to the section name
+			if (lastStory) {
+				var title = $(lastStory).parents('.section').attr('title').split(' ');
+				counter.text(title[0]); unit.text(title[1]);
+			}
+		});
+	</script>
+
+</body>
+</html>
